@@ -12,6 +12,13 @@ LOGO = '''<svg class="brand-mark" viewBox="0 0 40 40" aria-hidden="true">
   <path class="pulse" d="M8 19H14L16.5 13L20 25L22.5 17.5L24 19H32"/></svg>
 <span class="brand-word"><b>하트케어<em>내과</em></b><small>HEART CARE CLINIC</small></span>'''
 
+def nav_html(active):
+    items = [("about","소개"),("doctor","의료진"),("clinics","진료분야"),("exams","정밀검사"),
+             ("space","공간"),("hours","진료안내"),("contact","오시는길"),("why","왜 하트케어인가")]
+    links = "".join(f'<a href="../index.html#{k}" class="tab{" active" if k==active else ""}">{v}</a>' for k,v in items)
+    return f'<nav class="tab-nav" aria-label="주요 메뉴"><div class="tab-track">{links}</div></nav>'
+NAV = nav_html("exams")
+
 def others_html(cur):
     cards = ""
     for x in exams:
@@ -46,6 +53,7 @@ def page(x):
       <a class="btn btn-sm btn-primary" href="../index.html#contact">오시는 길</a>
     </div>
   </div>
+  {NAV}
 </header>
 
 <main>

@@ -13,23 +13,30 @@ ZONES = {
     "staff":     ("#E7E9EC", "#A9AFB8", "#7A7E85"),
     "lab":       ("#E3EDF0", "#7FB0BE", "#4F8494"),
     "misc":      ("#EFEBE3", "#C9BBA0", "#9A917C"),
+    "pharmacy":  ("#EDEBF2", "#B4AEC8", "#8079A0"),
 }
-# 방: (label, x, y, w, h, zone, icon)
+CANVAS = (1040, 600)
+# 실제 4안 배치 반영: 북측(위)=진료실 연속, 중앙=대기 라운지(대), 서/남서=검사 클러스터,
+# 동측=수액·약국(별도), 중앙하단=접수·주출입구. (label, x, y, w, h, zone, icon)
 ROOMS = [
-    ("진료실 1", 46, 58, 150, 128, "consult", "consult"),
-    ("진료실 2", 206, 58, 150, 128, "consult", "consult"),
-    ("진료실 3", 366, 58, 150, 128, "consult", "consult"),
-    ("상담실", 526, 58, 128, 128, "consult", "consult"),
-    ("직원휴게실", 746, 58, 208, 128, "staff", "staff"),
-    ("심초음파실", 46, 206, 170, 156, "exam", "bed"),
-    ("X-ray실", 226, 206, 148, 156, "exam", "xray"),
-    ("심전도실", 384, 206, 132, 156, "exam", "ecg"),
-    ("임상병리실", 526, 206, 128, 156, "lab", "lab"),
-    ("주사·수액실", 746, 206, 208, 156, "treatment", "iv"),
-    ("접수·수납 데스크", 46, 382, 220, 168, "reception", "desk"),
-    ("대기 라운지", 286, 382, 360, 168, "lounge", "lounge"),
-    ("편의코너", 666, 382, 128, 168, "misc", "kiosk"),
-    ("화장실", 806, 382, 148, 168, "misc", "wc"),
+    # 북측(창가) 진료·상담 + 임상병리 + 직원휴게(북서 코너)
+    ("직원휴게실", 44, 54, 150, 122, "staff", "staff"),
+    ("진료실 3", 204, 54, 150, 122, "consult", "consult"),
+    ("진료실 2", 364, 54, 150, 122, "consult", "consult"),
+    ("진료실 1", 524, 54, 150, 122, "consult", "consult"),
+    ("임상병리실", 684, 54, 140, 122, "lab", "lab"),
+    ("상담실", 834, 54, 162, 122, "consult", "consult"),
+    # 중앙: 대기 라운지(대) — 캔버스 중앙. 서측: 심초음파(무창). 동측: 수액·약국
+    ("심초음파실", 44, 190, 236, 170, "exam", "bed"),
+    ("대기 라운지", 300, 190, 440, 170, "lounge", "lounge"),
+    ("주사·수액실", 760, 190, 132, 170, "treatment", "iv"),
+    ("약국", 904, 190, 92, 170, "pharmacy", "rx"),
+    # 남측: 검사(X-ray·심전도, 서남) + 접수 데스크(중앙, 주출입구 앞) + 편의·화장실
+    ("X-ray실", 44, 374, 150, 128, "exam", "xray"),
+    ("심전도실", 204, 374, 150, 128, "exam", "ecg"),
+    ("접수·수납 데스크", 380, 374, 280, 128, "reception", "desk"),
+    ("편의코너", 676, 374, 150, 128, "misc", "kiosk"),
+    ("화장실", 836, 374, 160, 128, "misc", "wc"),
 ]
 # 공간 슬러그 → 강조 그룹/방라벨
 HIGHLIGHT = {
@@ -80,12 +87,15 @@ def _icon(kind, cx, cy, c):
     elif kind == "kiosk":  # 키오스크
         o += f'<rect x="{cx-13}" y="{cy-20}" width="26" height="34" rx="4" fill="none" stroke="{c}" stroke-width="2.5"/>'
         o += f'<rect x="{cx-8}" y="{cy-15}" width="16" height="14" rx="2" fill="{c}" opacity=".7"/>'
+    elif kind == "rx":  # 약국 십자
+        o += f'<rect x="{cx-15}" y="{cy-15}" width="30" height="30" rx="7" fill="none" stroke="{c}" stroke-width="2.6"/>'
+        o += f'<path d="M{cx},{cy-8} v16 M{cx-8},{cy} h16" stroke="{c}" stroke-width="3.4" stroke-linecap="round"/>'
     elif kind == "wc":  # 화장실
         o += f'<circle cx="{cx-9}" cy="{cy-14}" r="4.5" fill="{c}"/><path d="M{cx-9},{cy-8} v14 M{cx-15},{cy-2} h12 M{cx-9},{cy+6} l-4,10 M{cx-9},{cy+6} l4,10" stroke="{c}" stroke-width="2.4" fill="none" stroke-linecap="round"/>'
         o += f'<circle cx="{cx+10}" cy="{cy-14}" r="4.5" fill="{c}"/><path d="M{cx+10},{cy-8} l-6,14 h12 Z M{cx+10},{cy+6} v10" stroke="{c}" stroke-width="2.4" fill="{c}" fill-opacity=".2" stroke-linejoin="round"/>'
     return o
 
-def clinic_map_svg(highlight=None, w=1000, h=596):
+def clinic_map_svg(highlight=None, w=CANVAS[0], h=CANVAS[1]):
     hl = HIGHLIGHT.get(highlight, {}).get("labels", set()) if highlight else set()
     dim = bool(hl)
     s = [f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {w} {h}" width="100%" role="img" aria-label="하트케어내과 공간 개념도">']

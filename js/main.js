@@ -98,4 +98,24 @@
 
   /* 지도: 현재는 정적 위성 이미지(map.png, index.html에 직접 삽입).
      카카오 JS키 발급 후 라이브 지도로 교체 예정 — 그때 이 위치에 SDK 초기화 코드 추가. */
+
+  /* ── 히어로 이미지 스크롤 스케일 (은은하게 커졌다가 사라질 때 작아짐) ── */
+  const heroFig = document.querySelector(".hero-figure");
+  const heroImg = heroFig && heroFig.querySelector("img");
+  if (heroImg && !reduced) {
+    let ticking = false;
+    const paint = () => {
+      ticking = false;
+      const r = heroFig.getBoundingClientRect();
+      const vh = innerHeight || document.documentElement.clientHeight;
+      const p = Math.min(1, Math.max(0, -r.top / (r.height + vh * 0.5)));
+      const scale = 1 + 0.08 * Math.sin(p * Math.PI) - 0.045 * p; // 1 → 1.06 → 0.96
+      heroImg.style.transform = "scale(" + scale.toFixed(4) + ")";
+    };
+    const onScrollHero = () => { if (!ticking) { ticking = true; requestAnimationFrame(paint); } };
+    addEventListener("scroll", onScrollHero, { passive: true });
+    addEventListener("resize", onScrollHero, { passive: true });
+    paint();
+  }
+
 })();

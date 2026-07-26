@@ -25,7 +25,10 @@ data/spaces.json      # 공간 단일 소스(그리드 + 세부페이지)
 exam/<slug>.html      # 검사 9종 세부페이지 (gen_exams.py)
 space/<slug>.html     # 공간 4종 세부페이지 (gen_spaces.py) — 설계원칙 + 실제 평면도
 tools/gen_exams.py    # exams.json → 세부페이지: python3 tools/gen_exams.py
-tools/gen_spaces.py   # spaces.json → 세부페이지: python3 tools/gen_spaces.py
+tools/gen_spaces.py   # spaces.json → 세부페이지(개념도 강조 포함): python3 tools/gen_spaces.py
+tools/conceptmap.py   # 공간 개념도(일러스트 평면도) SVG 생성. clinic_map_svg(highlight)로
+                      #   특정 공간 테두리 강조. 실행 시 assets/conceptmap.svg(전체) 출력.
+                      #   방↔공간 매핑은 conceptmap.py의 HIGHLIGHT dict에서 수정.
 assets/real/          # 실사 (히어로·의료진·방송4·공간3·지도·평면도·로고)
 assets/real/equip/    # 정밀검사 장비 실사 9종
 이미지/               # 원본 업로드(히어로·방송·프로필·지도 스크린샷) — 소스 보관
