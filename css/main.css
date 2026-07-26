@@ -45,6 +45,8 @@
   --ease-out: cubic-bezier(.16,1,.3,1);
 }
 
+@font-face{ font-family:'JalnanGothic'; src:url('https://cdn.jsdelivr.net/gh/fontbee/font@main/gccompany/JalnanGothic.woff') format('woff'); font-weight:400; font-style:normal; font-display:swap }
+
 *{ box-sizing:border-box; margin:0; padding:0 }
 html{ scroll-behavior:smooth; -webkit-text-size-adjust:100% }
 @media (prefers-reduced-motion: reduce){ html{ scroll-behavior:auto } }
@@ -131,15 +133,15 @@ a{ color:inherit; text-decoration:none }
 .btn:hover .arr{ transform:translateX(3px) }
 
 /* ── Logo lockup (v2: 하트 문양+워드마크 밀착, 영문 제거) ── */
-.brand{ display:inline-flex; align-items:center; gap:1px }
-.brand-mark{ width:auto; height:36px; flex:0 0 auto; display:block }
+.brand{ display:inline-flex; align-items:center; gap:2px; font-size:22px }
+.brand-mark{ width:auto; height:0.81em; flex:0 0 auto; display:block }
 .brand-mark .heart{ fill:var(--red); transform-origin:center; animation:heartbeat 2.4s var(--ease) infinite }
 .brand-mark .pulse{ stroke:#fff; stroke-width:2.7; fill:none; stroke-linecap:round; stroke-linejoin:round }
 @keyframes heartbeat{
   0%,72%,100%{ transform:scale(1) } 78%{ transform:scale(1.11) } 84%{ transform:scale(.97) } 90%{ transform:scale(1.04) }
 }
 @media (prefers-reduced-motion: reduce){ .brand-mark .heart{ animation:none } }
-.brand-word{ font-family:'Black Han Sans', var(--font-ui); font-size:23px; font-weight:400; letter-spacing:-0.02em; color:var(--ink); line-height:1; white-space:nowrap }
+.brand-word{ font-family:'JalnanGothic', var(--font-ui); font-size:1em; font-weight:400; letter-spacing:-0.01em; color:var(--ink); line-height:1; white-space:nowrap }
 .brand-word em{ font-style:normal; color:var(--red); margin-left:0.03em }
 /* 지점 라벨 — 여의도 / 본점 시각적 분리 */
 .brand-branch{ display:inline-flex; align-items:center; gap:6px; margin-left:10px; padding-left:11px; border-left:1.5px solid var(--line) }
@@ -147,9 +149,9 @@ a{ color:inherit; text-decoration:none }
 .brand-branch b{ font-size:11px; font-weight:800; color:var(--red); background:var(--red-soft); padding:3px 8px; border-radius:6px; letter-spacing:-0.01em }
 @media (max-width:460px){ .brand-branch{ display:none } }
 /* 큰 로고(브랜드 밴드/문구용) */
-.brand-lg{ gap:2px }
-.brand-lg .brand-mark{ width:auto; height:50px }
-.brand-lg .brand-word{ font-size:clamp(26px,3.4vw,34px) }
+.brand-lg{ gap:3px; font-size:clamp(27px,3.4vw,34px) }
+.brand-lg .brand-mark{ height:0.81em }
+.brand-lg .brand-word{ font-size:1em }
 /* 다크 배경 */
 .on-dark .brand-word{ color:#fff }
 .on-dark .brand-branch{ border-color:rgba(255,255,255,.2) }
