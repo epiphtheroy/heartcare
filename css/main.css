@@ -134,7 +134,7 @@ a{ color:inherit; text-decoration:none }
 
 /* ── Logo lockup (v2: 하트 문양+워드마크 밀착, 영문 제거) ── */
 .brand{ display:inline-flex; align-items:center; gap:2px; font-size:22px }
-.brand-mark{ width:auto; height:0.81em; flex:0 0 auto; display:block }
+.brand-mark{ width:auto; height:0.9em; flex:0 0 auto; display:block }
 .brand-mark .heart{ fill:var(--red); transform-origin:center; animation:heartbeat 2.4s var(--ease) infinite }
 .brand-mark .pulse{ stroke:#fff; stroke-width:2.7; fill:none; stroke-linecap:round; stroke-linejoin:round }
 @keyframes heartbeat{
@@ -150,7 +150,7 @@ a{ color:inherit; text-decoration:none }
 @media (max-width:460px){ .brand-branch{ display:none } }
 /* 큰 로고(브랜드 밴드/문구용) */
 .brand-lg{ gap:3px; font-size:clamp(27px,3.4vw,34px) }
-.brand-lg .brand-mark{ height:0.81em }
+.brand-lg .brand-mark{ height:0.9em }
 .brand-lg .brand-word{ font-size:1em }
 /* 다크 배경 */
 .on-dark .brand-word{ color:#fff }
@@ -496,3 +496,40 @@ a{ color:inherit; text-decoration:none }
 .foot-tagline{ font-family:var(--font-display); font-size:clamp(15px,2vw,18px); font-weight:600;
   color:var(--on-ink-2); letter-spacing:-0.02em; margin-bottom:12px }
 .foot-tagline b{ color:#FF7B70; font-weight:700 }
+
+/* ═══════════ 정밀검사 강점 보강 ═══════════ */
+/* 세부페이지: 핵심 장점 콜아웃 */
+.ed-highlight{ margin-top:16px; padding:13px 17px; background:var(--red-soft); border-left:3px solid var(--red);
+  border-radius:8px; font-size:14.5px; font-weight:700; color:var(--red-deep); line-height:1.6 }
+/* 세부페이지: 비교표 */
+.ed-compare{ margin-top:clamp(28px,4vw,44px) }
+.ed-compare h3{ font-size:15px; font-weight:800; margin-bottom:14px; display:flex; align-items:center; gap:8px }
+.ed-compare h3::before{ content:""; width:16px; height:2px; background:var(--red) }
+.ed-compare table{ width:100%; border-collapse:collapse; border:1px solid var(--line); border-radius:12px; overflow:hidden }
+.ed-compare th,.ed-compare td{ padding:13px 14px; font-size:14px; text-align:center; border-bottom:1px solid var(--line) }
+.ed-compare thead th{ background:var(--paper-2); font-weight:800 }
+.ed-compare thead th:last-child{ background:var(--red-soft); color:var(--red) }
+.ed-compare th:first-child,.ed-compare td:first-child{ text-align:left; font-weight:700; color:var(--ink-2) }
+.ed-compare td.hi{ color:var(--red-deep); font-weight:800; background:var(--red-soft-2) }
+.ed-compare tbody tr:last-child td{ border-bottom:none }
+/* 세부페이지: 공통 강점 밴드 */
+.ed-strengths{ margin-top:clamp(28px,4vw,44px); background:var(--paper-2); border:1px solid var(--line);
+  border-radius:var(--r-lg); padding:clamp(26px,3.5vw,40px) }
+.ed-strengths h3{ font-family:var(--font-display); font-weight:700; font-size:clamp(18px,2.4vw,22px); text-align:center; margin-bottom:22px }
+.ed-str-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:20px }
+@media (max-width:760px){ .ed-str-grid{ grid-template-columns:1fr; gap:16px } }
+.ed-str{ text-align:center }
+.ed-str-ic{ display:inline-grid; place-items:center; width:46px; height:46px; border-radius:13px; background:#fff;
+  box-shadow:var(--sh-1); margin-bottom:12px }
+.ed-str-ic svg{ width:23px; height:23px; stroke:var(--red); fill:none; stroke-width:1.9; stroke-linecap:round; stroke-linejoin:round }
+.ed-str b{ display:block; font-size:16px; font-weight:800; letter-spacing:-0.02em; margin-bottom:7px }
+.ed-str p{ font-size:13.5px; color:var(--ink-2); line-height:1.7 }
+/* 메인 정밀검사 강점 스트립 */
+.exam-strengths{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:clamp(28px,3.5vw,40px) }
+@media (max-width:760px){ .exam-strengths{ grid-template-columns:1fr } }
+.exam-str{ display:flex; align-items:center; gap:14px; background:#fff; border:1px solid var(--line);
+  border-radius:14px; padding:17px 20px; box-shadow:var(--sh-1) }
+.es-ic{ flex:0 0 auto; width:42px; height:42px; border-radius:12px; background:var(--red-soft); display:grid; place-items:center }
+.es-ic svg{ width:22px; height:22px; stroke:var(--red); fill:none; stroke-width:1.9; stroke-linecap:round; stroke-linejoin:round }
+.exam-str b{ display:block; font-size:15px; font-weight:800; letter-spacing:-0.02em }
+.exam-str span{ font-size:12.5px; color:var(--ink-weak) }

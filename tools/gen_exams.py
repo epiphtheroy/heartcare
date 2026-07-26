@@ -7,7 +7,7 @@ exams = json.load(open(os.path.join(ROOT, "data", "exams.json"), encoding="utf-8
 outdir = os.path.join(ROOT, "exam"); os.makedirs(outdir, exist_ok=True)
 E = lambda s: html.escape(s, quote=True)
 
-LOGO = '''<svg class="brand-mark" viewBox="5 0 38 40" aria-hidden="true">
+LOGO = '''<svg class="brand-mark" viewBox="6 4 36 33" aria-hidden="true">
   <path class="heart" d="M24 36.5C24 36.5 6 25.5 6 14C6 8.4 10 5 14.6 5C18.6 5 21.8 7.4 24 10.6C26.2 7.4 29.4 5 33.4 5C38 5 42 8.4 42 14C42 25.5 24 36.5 24 36.5Z"/>
   <path class="pulse" d="M12 20H17L20 13.5L24 27L27 18L29 20H40"/></svg>
 <span class="brand-word">하트케어<em>내과</em></span>
@@ -27,9 +27,28 @@ def others_html(cur):
         cards += f'''<a class="ed-other" href="{x['slug']}.html"><img src="../{x['image']}" alt="{E(x['name'])}" loading="lazy"><span>{E(x['name'])}</span></a>'''
     return cards
 
+STRENGTHS = '''<div class="ed-strengths">
+  <h3>하트케어내과 정밀검사의 약속</h3>
+  <div class="ed-str-grid">
+    <div class="ed-str"><span class="ed-str-ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg></span><b>당일 검사 · 즉시 판독</b><p>검사부터 결과 설명까지 당일에. 재방문 없이 진단·치료를 결정합니다.</p></div>
+    <div class="ed-str"><span class="ed-str-ic"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="12" rx="2"/><path d="M8 20h8M12 16v4M7 10h3l1-2 2 4 1-2h3"/></svg></span><b>대학병원급 하이엔드 장비</b><p>미세한 이상까지 잡아내는 대학병원 수준의 검사 장비를 갖췄습니다.</p></div>
+    <div class="ed-str"><span class="ed-str-ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M5 21c0-3.9 3.1-7 7-7s7 3.1 7 7"/></svg></span><b>전문의 직접 검사·판독</b><p>심장내과 전문의가 검사와 판독, 결과 설명까지 직접 수행합니다.</p></div>
+  </div>
+</div>'''
+
 def page(x):
     who = "".join(f"<li>{E(w)}</li>" for w in x["whoFor"])
     feat = "".join(f"<li>{E(f)}</li>" for f in x["features"])
+    hl = f'<p class="ed-highlight">{E(x["highlight"])}</p>' if x.get("highlight") else ""
+    cmp = ""
+    if x.get("compare"):
+        c = x["compare"]
+        head = "".join(f"<th>{E(h)}</th>" for h in c["head"])
+        rows = ""
+        for r in c["rows"]:
+            cells = "".join((f'<td class="hi">{E(cell)}</td>' if (i==len(r)-1 and i>0) else f"<td>{E(cell)}</td>") for i,cell in enumerate(r))
+            rows += f"<tr>{cells}</tr>"
+        cmp = f'<div class="ed-compare"><h3>{E(c["title"])}</h3><table><thead><tr>{head}</tr></thead><tbody>{rows}</tbody></table></div>'
     return f'''<!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -67,6 +86,7 @@ def page(x):
         <span class="ed-badge">{E(x['badge'])}</span>
         <h1 class="ed-title">{E(x['name'])}</h1>
         <p class="ed-lead">{E(x['lead'])}</p>
+        {hl}
         <a class="btn btn-primary" href="../index.html#contact" style="margin-top:28px">진료 문의하기 <span class="arr">→</span></a>
       </div>
     </div>
@@ -82,9 +102,12 @@ def page(x):
       </div>
     </div>
 
+    {cmp}
+    {STRENGTHS}
+
     <div class="ed-cta">
       <h3>{E(x['name'])}, 원내에서 당일 진행합니다</h3>
-      <p>2026년 8월 여의도 개원 · 국회의사당역 도보 1분</p>
+      <p>2026년 11월 여의도 개원 · 국회의사당역 도보 1분</p>
       <a class="btn btn-primary" href="../index.html#contact">오시는 길 · 문의 <span class="arr">→</span></a>
     </div>
 
@@ -99,7 +122,7 @@ def page(x):
 <footer class="site-foot">
   <div class="wrap foot-grid">
     <a class="brand on-dark" href="../index.html" aria-label="하트케어내과 홈">{LOGO}</a>
-    <p class="foot-info">하트케어내과 · 대표원장 최순욱 · 서울 영등포구 은행로 3 (여의도동) 삼희익스콘벤처타워 2층 · 2026년 8월 개원 예정<br>사업자등록번호 발급 중 · 문의 <a href="mailto:heartcareclinic@naver.com">heartcareclinic@naver.com</a></p>
+    <p class="foot-info">하트케어내과 · 대표원장 최순욱 · 서울 영등포구 은행로 3 (여의도동) 삼희익스콘벤처타워 2층 · 2026년 11월 개원 예정<br>사업자등록번호 발급 중 · 문의 <a href="mailto:heartcareclinic@naver.com">heartcareclinic@naver.com</a></p>
     <p class="foot-legal">ⓒ 2026 HeartCare Internal Medicine Clinic.</p>
   </div>
 </footer>

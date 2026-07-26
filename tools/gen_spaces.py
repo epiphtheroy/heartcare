@@ -9,7 +9,7 @@ spaces = json.load(open(os.path.join(ROOT, "data", "spaces.json"), encoding="utf
 outdir = os.path.join(ROOT, "space"); os.makedirs(outdir, exist_ok=True)
 E = lambda s: html.escape(s, quote=True)
 
-LOGO = '''<svg class="brand-mark" viewBox="5 0 38 40" aria-hidden="true">
+LOGO = '''<svg class="brand-mark" viewBox="6 4 36 33" aria-hidden="true">
   <path class="heart" d="M24 36.5C24 36.5 6 25.5 6 14C6 8.4 10 5 14.6 5C18.6 5 21.8 7.4 24 10.6C26.2 7.4 29.4 5 33.4 5C38 5 42 8.4 42 14C42 25.5 24 36.5 24 36.5Z"/>
   <path class="pulse" d="M12 20H17L20 13.5L24 27L27 18L29 20H40"/></svg>
 <span class="brand-word">하트케어<em>내과</em></span>
@@ -86,7 +86,7 @@ def page(s):
 
     <div class="ed-cta">
       <h3>진료 동선까지 설계한 공간에서 뵙겠습니다</h3>
-      <p>2026년 8월 여의도 개원 · 국회의사당역 도보 1분</p>
+      <p>2026년 11월 여의도 개원 · 국회의사당역 도보 1분</p>
       <a class="btn btn-primary" href="../index.html#contact">오시는 길 · 문의 <span class="arr">→</span></a>
     </div>
 
@@ -101,7 +101,7 @@ def page(s):
 <footer class="site-foot">
   <div class="wrap foot-grid">
     <a class="brand on-dark" href="../index.html" aria-label="하트케어내과 홈">{LOGO}</a>
-    <p class="foot-info">하트케어내과 · 대표원장 최순욱 · 서울 영등포구 은행로 3 (여의도동) 삼희익스콘벤처타워 2층 · 2026년 8월 개원 예정<br>사업자등록번호 발급 중 · 문의 <a href="mailto:heartcareclinic@naver.com">heartcareclinic@naver.com</a></p>
+    <p class="foot-info">하트케어내과 · 대표원장 최순욱 · 서울 영등포구 은행로 3 (여의도동) 삼희익스콘벤처타워 2층 · 2026년 11월 개원 예정<br>사업자등록번호 발급 중 · 문의 <a href="mailto:heartcareclinic@naver.com">heartcareclinic@naver.com</a></p>
     <p class="foot-legal">공간 이미지는 설계 방향 연출 이미지이며, 실제와 다를 수 있습니다. ⓒ 2026 HeartCare Internal Medicine Clinic.</p>
   </div>
 </footer>
