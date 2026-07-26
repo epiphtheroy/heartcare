@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 """spaces.json → space/<slug>.html. 실사 + 설계 원칙 + 실제 평면도."""
-import json, os, html
+import json, os, html, sys
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from conceptmap import clinic_map_svg
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 spaces = json.load(open(os.path.join(ROOT, "data", "spaces.json"), encoding="utf-8"))
@@ -66,11 +68,12 @@ def page(s):
         <h3><span class="num">◆</span> 설계 원칙</h3>
         <ul class="ed-list check">{pts}</ul>
       </div>
-      <figure class="card ed-panel" style="padding:0;overflow:hidden">
-        <img src="../assets/real/floorplan.png" alt="하트케어내과 평면 설계도" style="width:100%;display:block">
+      <figure class="card ed-panel cmap-panel">
+        <figcaption class="cmap-cap">공간 개념도 · <b>{E(s['name'])}</b> 위치</figcaption>
+        <div class="cmap">{clinic_map_svg(s['slug'])}</div>
       </figure>
     </div>
-    <p class="space-note" style="margin-top:18px">본 이미지는 설계 방향을 보여주는 연출 이미지이며, 평면도는 실제 계획설계 자료입니다. 완공 후 실제 공간 사진으로 교체됩니다.</p>
+    <p class="space-note" style="margin-top:18px">위 사진은 설계 방향을 보여주는 연출 이미지이며, 개념도는 실제 공간 배치를 이해하기 쉽게 나타낸 그림입니다. 완공 후 실제 공간 사진으로 교체됩니다.</p>
 
     <div class="ed-cta">
       <h3>진료 동선까지 설계한 공간에서 뵙겠습니다</h3>

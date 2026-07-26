@@ -448,3 +448,18 @@ a{ color:inherit; text-decoration:none }
 .why-card p b{ color:var(--on-ink); font-weight:700 }
 .why-foot{ display:block; margin-top:20px; padding-top:18px; border-top:1px solid rgba(243,241,236,.1);
   font-size:13px; font-weight:700; color:#FF7B70 }
+
+/* ═══════════ 공간 개념도 ═══════════ */
+.cmap-panel{ padding:18px 18px 14px; display:block }
+.cmap-cap{ font-size:12.5px; font-weight:700; color:var(--ink-3); margin-bottom:10px }
+.cmap-cap b{ color:var(--red) }
+.cmap{ border-radius:12px; overflow:hidden }
+.cmap svg{ display:block; width:100%; height:auto }
+/* 메인 공간 섹션 개념도 오버뷰 */
+.space-map{ margin-top:clamp(30px,4vw,48px); border-radius:var(--r-lg); overflow:hidden; border:1px solid var(--line); box-shadow:var(--sh-1) }
+.space-map svg, .space-map img{ display:block; width:100%; height:auto }
+.space-map-cap{ margin-top:14px; font-size:13px; color:var(--ink-weak); text-align:center }
+
+/* 푸터 개원소식 CTA */
+.foot-cta{ justify-self:start; margin-bottom:6px }
+@media (max-width:560px){ .foot-cta{ width:100% } }
