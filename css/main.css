@@ -134,7 +134,7 @@ a{ color:inherit; text-decoration:none }
 
 /* ── Logo lockup (v2: 하트 문양+워드마크 밀착, 영문 제거) ── */
 .brand{ display:inline-flex; align-items:center; gap:2px; font-size:22px }
-.brand-mark{ width:auto; height:0.9em; flex:0 0 auto; display:block }
+.brand-mark{ width:auto; height:1.0em; flex:0 0 auto; display:block; transform:translateY(-0.06em) }
 .brand-mark .heart{ fill:var(--red); transform-origin:center; animation:heartbeat 2.4s var(--ease) infinite }
 .brand-mark .pulse{ stroke:#fff; stroke-width:2.7; fill:none; stroke-linecap:round; stroke-linejoin:round }
 @keyframes heartbeat{
@@ -150,7 +150,7 @@ a{ color:inherit; text-decoration:none }
 @media (max-width:460px){ .brand-branch{ display:none } }
 /* 큰 로고(브랜드 밴드/문구용) */
 .brand-lg{ gap:3px; font-size:clamp(27px,3.4vw,34px) }
-.brand-lg .brand-mark{ height:0.9em }
+.brand-lg .brand-mark{ height:1.0em }
 .brand-lg .brand-word{ font-size:1em }
 /* 다크 배경 */
 .on-dark .brand-word{ color:#fff }
