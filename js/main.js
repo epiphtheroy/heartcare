@@ -59,6 +59,7 @@
             <img src="${x.image}" alt="${x.name} 검사 장비" loading="lazy"></div>
           <div class="exam-body">
             <h3>${x.name}</h3><p>${x.short}</p>
+            <div class="exam-tags">${(x.tags||[]).map((t)=>`<span class="exam-tag">${t}</span>`).join("")}</div>
             <span class="exam-more">자세히 보기 <span class="arr">→</span></span>
           </div>
         </a>`).join("");
@@ -106,10 +107,11 @@
     let ticking = false;
     const paint = () => {
       ticking = false;
-      const r = heroFig.getBoundingClientRect();
-      const vh = innerHeight || document.documentElement.clientHeight;
-      const p = Math.min(1, Math.max(0, -r.top / (r.height + vh * 0.5)));
-      const scale = 1 + 0.08 * Math.sin(p * Math.PI) - 0.045 * p; // 1 → 1.06 → 0.96
+      const heroH = heroFig.offsetHeight || 400;
+      const p = Math.min(Math.max(scrollY / heroH, 0), 1); // 스크롤 상단(0)부터 시작
+      const PEAK = 0.28;
+      const f = p <= PEAK ? (p / PEAK) : 1 - (p - PEAK) / (1 - PEAK) * 1.7;
+      const scale = 1 + 0.15 * f; // 상단부에서 빠르게 커져 1.15, 하단으로 갈수록 ~0.9
       heroImg.style.transform = "scale(" + scale.toFixed(4) + ")";
     };
     const onScrollHero = () => { if (!ticking) { ticking = true; requestAnimationFrame(paint); } };
