@@ -7,10 +7,11 @@ exams = json.load(open(os.path.join(ROOT, "data", "exams.json"), encoding="utf-8
 outdir = os.path.join(ROOT, "exam"); os.makedirs(outdir, exist_ok=True)
 E = lambda s: html.escape(s, quote=True)
 
-LOGO = '''<svg class="brand-mark" viewBox="0 0 40 40" aria-hidden="true">
-  <path class="heart" d="M20 34C20 34 5 24.5 5 14.5C5 9.2 9 6 13 6C16.2 6 18.6 8 20 10.4C21.4 8 23.8 6 27 6C31 6 35 9.2 35 14.5C35 24.5 20 34 20 34Z"/>
-  <path class="pulse" d="M8 19H14L16.5 13L20 25L22.5 17.5L24 19H32"/></svg>
-<span class="brand-word"><b>하트케어<em>내과</em></b><small>HEART CARE CLINIC</small></span>'''
+LOGO = '''<svg class="brand-mark" viewBox="0 0 48 40" aria-hidden="true">
+  <path class="heart" d="M24 36.5C24 36.5 6 25.5 6 14C6 8.4 10 5 14.6 5C18.6 5 21.8 7.4 24 10.6C26.2 7.4 29.4 5 33.4 5C38 5 42 8.4 42 14C42 25.5 24 36.5 24 36.5Z"/>
+  <path class="pulse" d="M12 20H17L20 13.5L24 27L27 18L29 20H40"/></svg>
+<span class="brand-word">하트케어<em>내과</em></span>
+<span class="brand-branch"><i>여의도</i><b>본점</b></span>'''
 
 def nav_html(active):
     items = [("about","소개"),("doctor","의료진"),("clinics","진료분야"),("exams","정밀검사"),
